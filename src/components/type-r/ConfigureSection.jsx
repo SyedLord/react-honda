@@ -30,7 +30,7 @@ const ConfigureSection = () => {
               alt={`${name} Civic Type R`}
               className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${
                 selectedColor === name ? "opacity-100" : "opacity-0"
-              }`}
+              } scale-125 md:scale-100`}
             />
           ))}
         </div>

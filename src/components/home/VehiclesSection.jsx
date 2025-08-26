@@ -32,11 +32,11 @@ const VehicleCard = ({ img, alt, link }) => (
 
 const VehiclesSection = () => {
   return (
-    <section className="bg-white text-gray-800 flex flex-col items-center py-32 px-8">
+    <section className="bg-white text-gray-800 flex flex-col items-center py-40 px-8">
       <h2 className="text-4xl md:text-5xl text-honda-red mb-12 text-center font-light">
         Our Honda Vehicles
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl md:w-full w-85">
         {vehicleData.map((vehicle, index) => (
           <VehicleCard key={index} {...vehicle} />
         ))}

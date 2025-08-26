@@ -34,15 +34,19 @@ const JourneyCard = ({ card, videoRef, cardRef }) => {
   return (
     <div
       ref={cardRef}
-      className="journey-card relative flex-1 h-[300px] md:h-full rounded-2xl overflow-hidden cursor-pointer"
+      className="journey-card relative flex-1 h-full rounded-2xl overflow-hidden cursor-pointer"
     >
-      <div className="media-wrapper w-full h-full">
+      <div className="media-wrapper w-full h-full relative">
         {/* Thumbnail Image */}
         <img
           src={card.thumbnail}
           alt={`${card.alt} Thumbnail`}
           className="thumbnail absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300"
         />
+
+        {/* Blur overlay (only on mobile, and only over thumbnail) */}
+        <div className="mobile-blur absolute inset-0 z-20 backdrop-blur-[1.5px] md:hidden pointer-events-none"></div>
+
         {/* Video Preview */}
         <video
           ref={videoRef}
@@ -50,12 +54,16 @@ const JourneyCard = ({ card, videoRef, cardRef }) => {
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 z-30"
         >
           <source src={card.video} type="video/mp4" />
         </video>
       </div>
-      <div className="overlay absolute inset-0 bg-gradient-to-r from-black/30 to-transparent flex items-start justify-center pt-8">
+
+      <div
+        className="overlay absolute inset-0 bg-gradient-to-r from-black/30 to-transparent 
+                flex items-center justify-center md:items-start md:justify-center md:pt-8"
+      >
         <img
           src={card.logo}
           alt={`${card.alt} Logo`}
@@ -111,6 +119,8 @@ const JourneySection = () => {
 
       cards.forEach((card, index) => {
         const video = card.querySelector("video");
+        const logo = card.querySelector(".model-logo");
+        const blurOverlay = card.querySelector(".mobile-blur"); // blur div select kiya
 
         const mouseEnterHandler = () => {
           gsap.to(card, { flex: 1.3, duration: 0.4, ease: "power2.inOut" });
@@ -124,6 +134,7 @@ const JourneySection = () => {
               });
             }
           });
+
           if (video) {
             video.currentTime = 0;
             video.play().catch((e) => console.error("Video play failed:", e));
@@ -132,6 +143,16 @@ const JourneySection = () => {
               opacity: 0,
               duration: 0.3,
             });
+
+            // Logo hide
+            if (logo) {
+              gsap.to(logo, { opacity: 0, duration: 0.3 });
+            }
+
+            // Blur overlay hide (sirf mobile ke liye)
+            if (blurOverlay) {
+              gsap.to(blurOverlay, { opacity: 0, duration: 0.3 });
+            }
           }
         };
 
@@ -143,16 +164,27 @@ const JourneySection = () => {
             duration: 0.4,
             ease: "power2.inOut",
           });
+
           if (video) {
             video.pause();
             video.currentTime = 0;
             gsap.to(video, { opacity: 0, duration: 0.3 });
           }
 
-          // 🔹 Thumbnail ko wapas show karo
+          // Thumbnail show again
           const thumbnail = card.querySelector(".thumbnail");
           if (thumbnail) {
             gsap.to(thumbnail, { opacity: 1, duration: 0.3 });
+          }
+
+          // Logo show again
+          if (logo) {
+            gsap.to(logo, { opacity: 1, duration: 0.3 });
+          }
+
+          // Blur overlay show again (sirf mobile ke liye)
+          if (blurOverlay) {
+            gsap.to(blurOverlay, { opacity: 1, duration: 0.3 });
           }
         };
 
@@ -181,7 +213,7 @@ const JourneySection = () => {
         {/* Row 1 */}
         <div
           ref={addToRowRefs}
-          className="journey-row flex flex-col md:flex-row gap-8 md:h-[500px]"
+          className="journey-row flex flex-col md:flex-row gap-8 h-[500px] md:h-[500px]"
         >
           <JourneyCard card={journeyData[0]} />
           <JourneyCard card={journeyData[1]} />
@@ -189,7 +221,7 @@ const JourneySection = () => {
         {/* Row 2 */}
         <div
           ref={addToRowRefs}
-          className="journey-row flex flex-col md:flex-row gap-8 md:h-[500px]"
+          className="journey-row flex flex-col md:flex-row gap-8 h-[500px] md:h-[500px]"
         >
           <JourneyCard card={journeyData[2]} />
           <JourneyCard card={journeyData[3]} />

@@ -51,15 +51,15 @@ const CtaSection = () => {
   }, []);
 
   return (
-    <section className="bg-white dark:bg-honda-dark py-32 px-8">
+    <section className="bg-white dark:bg-honda-dark py-48 px-8">
       <div
         ref={sectionRef}
-        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto justify-items-center"
       >
         {ctaData.map((card, index) => (
           <div
             key={index}
-            className="cta-card bg-honda-dark text-white p-12 rounded-2xl text-center flex flex-col items-center justify-between opacity-0 transform translate-y-8 transition-all duration-700 ease-out"
+            className="cta-card bg-honda-dark text-white p-12 rounded-2xl text-center flex flex-col items-center justify-between opacity-0 transform translate-y-8 transition-all duration-700 ease-out w-85"
           >
             <img src={card.logo} alt={card.alt} className="mb-4 h-12" />
             <h3 className="text-2xl font-semibold mb-4">{card.title}</h3>

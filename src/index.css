@@ -3,20 +3,227 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Step 1: Apna custom color define karein */
-@layer theme {
+/* Custom colors aur variables */
+@layer base {
   :root {
     --color-honda-red: #e60012;
     --color-honda-dark: #1a1a1a;
   }
+
+  /* Base body styles with smooth transitions */
+  body {
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
+  }
+
+  /* HTML element styling for dark mode transitions */
+  html {
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
+  }
 }
 
-/* Step 2: Ab us custom color ko istemal karke nayi class banayein (agar zaroorat ho) */
+/* Custom component classes - Honda colors */
 @layer components {
   .bg-honda-red {
-    @apply bg-[var(--color-honda-red)];
+    background-color: #e60012;
   }
+
   .text-honda-red {
-    @apply text-[var(--color-honda-red)];
+    color: #e60012;
+  }
+
+  .bg-honda-dark {
+    background-color: #1a1a1a;
+  }
+
+  .text-honda-dark {
+    color: #1a1a1a;
+  }
+
+  .border-honda-red {
+    border-color: #e60012;
+  }
+
+  .hover\:bg-honda-red:hover {
+    background-color: #e60012;
+  }
+
+  .hover\:text-honda-red:hover {
+    color: #e60012;
+  }
+
+  .hover\:border-honda-red:hover {
+    border-color: #e60012;
+  }
+}
+
+/* All sections ko dark mode ke liye smooth transitions */
+@layer utilities {
+  /* Smooth transitions for all sections */
+  .bg-white,
+  .bg-gray-100,
+  .text-gray-800,
+  .text-gray-300,
+  .text-gray-400 {
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out !important;
+  }
+
+  /* Dark mode background colors */
+  .dark .dark\:bg-honda-dark {
+    background-color: #1a1a1a !important;
+  }
+
+  .dark .dark\:bg-white {
+    background-color: #ffffff !important;
+  }
+
+  /* Dark mode text colors */
+  .dark .dark\:text-white {
+    color: #ffffff !important;
+  }
+
+  .dark .dark\:text-honda-red {
+    color: #e60012 !important;
+  }
+
+  .dark .dark\:text-gray-300 {
+    color: #d1d5db !important;
+  }
+
+  .dark .dark\:text-gray-400 {
+    color: #9ca3af !important;
+  }
+
+  /* Dark mode border colors */
+  .dark .dark\:border-gray-600 {
+    border-color: #4b5563 !important;
+  }
+
+  .dark .dark\:border-gray-700 {
+    border-color: #374151 !important;
+  }
+
+  /* Global dark mode styles for ALL sections */
+  .dark {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+  }
+
+  /* Force all white backgrounds to dark in dark mode */
+  .dark .bg-white {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+  }
+
+  .dark .bg-gray-100 {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+  }
+
+  /* Force all text colors in dark mode */
+  .dark .text-gray-800 {
+    color: #ffffff !important;
+  }
+
+  .dark .text-gray-600 {
+    color: #d1d5db !important;
+  }
+
+  /* Journey section heading ko by default red rakhne ke liye */
+  .text-honda-red.dark\:text-white {
+    color: #e60012;
+  }
+
+  /* Dark mode mein journey heading white karna */
+  .dark .text-honda-red.dark\:text-white {
+    color: #ffffff !important;
+  }
+
+  /* Vehicles section heading ko bhi dark mode mein white karna */
+  .dark .text-honda-red {
+    color: #ffffff !important;
+  }
+
+  /* Header dark mode override */
+  .dark .bg-white\/10 {
+    background-color: rgba(26, 26, 26, 0.1) !important;
+  }
+
+  .dark .backdrop-blur-md {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+  }
+
+  /* Font family - Poppins */
+  .font-poppins {
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+/* Additional hover effects jo aapke components mein use ho rahe hain */
+@layer utilities {
+  .hover\:bg-\[#cc0010\]:hover {
+    background-color: #cc0010;
+  }
+
+  .transition-colors {
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .duration-300 {
+    transition-duration: 300ms;
+  }
+
+  .duration-700 {
+    transition-duration: 700ms;
+  }
+
+  .duration-800 {
+    transition-duration: 800ms;
+  }
+
+  .ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Vehicles section ki height increase karna */
+  .py-32 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+
+  /* CTA section ki height increase karna */
+  .py-32.cta-section-spacing {
+    padding-top: 15rem !important;
+    padding-bottom: 15rem !important;
+  }
+
+  /* Additional spacing utility classes */
+  .py-40 {
+    padding-top: 12rem !important;
+    padding-bottom: 12rem !important;
+  }
+
+  /* Journey section hover effects - logo fade out */
+  .journey-card:hover .model-logo {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .journey-card .model-logo {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Journey section hover effects - overlay fade */
+  .journey-card:hover .overlay {
+    opacity: 0.3;
+    transition: all 0.3s ease;
+  }
+
+  .journey-card .overlay {
+    transition: all 0.3s ease;
   }
 }
