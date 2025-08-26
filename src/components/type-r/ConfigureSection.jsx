@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 const colors = [
-  { name: "red", bg: "bg-gradient-to-br from-honda-red to-[#cc0010]" },
-  { name: "black", bg: "bg-gradient-to-br from-gray-900 to-black" },
+  { name: "red", bg: "bg-[#E5202D]" },
+  { name: "black", bg: "bg-[#000000]" },
   {
     name: "white",
-    bg: "bg-gradient-to-br from-white to-gray-200",
+    bg: "bg-[#DFDFDC]",
     border: "border-2 border-gray-300",
   },
-  { name: "blue", bg: "bg-gradient-to-br from-blue-700 to-blue-900" },
-  { name: "gray", bg: "bg-gradient-to-br from-gray-600 to-gray-800" },
+  { name: "blue", bg: "bg-[#009DF5]" },
+  { name: "gray", bg: "bg-[#6D7983]" },
 ];
 
 const ConfigureSection = () => {

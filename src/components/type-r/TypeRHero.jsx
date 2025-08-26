@@ -23,6 +23,9 @@ const TypeRHero = () => {
 
   return (
     <section className="relative h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+      {/* White background layer */}
+      <div className="absolute bottom-0 left-0 w-full h-[300px] md:h-[280px] bg-white z-0"></div>
+
       <div className="relative flex items-center justify-center pt-20 w-full max-w-7xl">
         {/* Civic Type R Logo */}
         <div
@@ -37,6 +40,8 @@ const TypeRHero = () => {
             alt="Type R Logo"
           />
         </div>
+
+        {/* <div className="absolute bottom-0 left-0 w-full h-[50px] md:h-[120px] bg-white z-0"></div> */}
 
         {/* Main Car Image */}
         <img
