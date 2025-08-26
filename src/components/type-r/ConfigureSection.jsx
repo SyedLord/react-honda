@@ -40,7 +40,7 @@ const ConfigureSection = () => {
             <div
               key={name}
               onClick={() => setSelectedColor(name)}
-              className={`relative w-16 h-16 md:w-20 md:h-20 cursor-pointer transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:-translate-y-1 ${bg} ${
+              className={`relative w-12 h-12 md:w-20 md:h-20 cursor-pointer transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:-translate-y-1 ${bg} ${
                 border || ""
               }
                           ${
