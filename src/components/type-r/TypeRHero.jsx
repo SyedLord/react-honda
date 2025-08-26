@@ -1,14 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import gsap from "gsap"; // <-- GSAP ko import karein
 
 const TypeRHero = () => {
-  const [isLogoVisible, setLogoVisible] = useState(false);
   const [isCarVisible, setCarVisible] = useState(false);
+  const logoRef = useRef(null); // <-- Logo ke liye ref banayein
 
   useEffect(() => {
-    // Logo animation trigger
-    const logoTimer = setTimeout(() => {
-      setLogoVisible(true);
-    }, 1000);
+    // GSAP Animation for Logo
+    if (logoRef.current) {
+      gsap.fromTo(
+        logoRef.current,
+        {
+          // Initial State (Shuru kahan se ho)
+          opacity: 0,
+          y: 100, // Thora neeche se shuru ho
+          scale: 0.8,
+        },
+        {
+          // Final State (Kahan tak jaye)
+          opacity: 1,
+          y: 0, // Apni aam position par wapas
+          scale: 1,
+          duration: 1.2,
+          delay: 0.5, // Thora ruk kar start ho
+          ease: "power3.out",
+        }
+      );
+    }
 
     // Car animation trigger
     const carTimer = setTimeout(() => {
@@ -16,7 +34,6 @@ const TypeRHero = () => {
     }, 300);
 
     return () => {
-      clearTimeout(logoTimer);
       clearTimeout(carTimer);
     };
   }, []);
@@ -29,19 +46,14 @@ const TypeRHero = () => {
       <div className="relative flex items-center justify-center pt-20 w-full max-w-7xl">
         {/* Civic Type R Logo */}
         <div
-          className={`absolute top-[-150px] md:top-[-100px] left-1/2 w-[300px] z-10 transition-all duration-1000 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
-            isLogoVisible
-              ? "transform -translate-x-1/2 translate-y-1/2 scale-100 opacity-100"
-              : "transform -translate-x-1/2 scale-0 opacity-0"
-          }`}
+          ref={logoRef}
+          className="absolute top-[-100px] md:top-[-50px] left-1/2 w-[300px] z-0 transform -translate-x-1/2 opacity-0"
         >
           <img
             src="/assets/images/section 3/logo/type r.png"
             alt="Type R Logo"
           />
         </div>
-
-        {/* <div className="absolute bottom-0 left-0 w-full h-[50px] md:h-[120px] bg-white z-0"></div> */}
 
         {/* Main Car Image */}
         <img
