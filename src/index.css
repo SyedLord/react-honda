@@ -2,3 +2,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Step 1: Apna custom color define karein */
+@layer theme {
+  :root {
+    --color-honda-red: #e60012;
+    --color-honda-dark: #1a1a1a;
+  }
+}
+
+/* Step 2: Ab us custom color ko istemal karke nayi class banayein (agar zaroorat ho) */
+@layer components {
+  .bg-honda-red {
+    @apply bg-[var(--color-honda-red)];
+  }
+  .text-honda-red {
+    @apply text-[var(--color-honda-red)];
+  }
+}
